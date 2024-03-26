@@ -28,6 +28,4 @@ Route::get('foo/post/create', [PostController::class, 'create'])->name('post.cre
 
 Route::post('foo/post/create', [PostController::class, 'store'])->name('post.store');
 
-/*
-Ejercicio: añadir ruta para la vista de paginación "user\paginate.blade.php"
-*/
+Route::get('foo/user/paginate', [UserController::class, 'paginate'])->name('user.paginate');

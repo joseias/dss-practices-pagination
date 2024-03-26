@@ -16,10 +16,11 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:10',
+            'content' => 'required',
+        ]);
 
-        /*
-        Ejercicio: añadir reglas de validación
-        */
 
         $user = User::findOrFail(1);
 

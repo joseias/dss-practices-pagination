@@ -1,4 +1,4 @@
-### # [DSS] Laravel Controllers, Forms, Validation and Pagination
+### # [DSS] Eloquent Practice
 
 ## Project initialization
 

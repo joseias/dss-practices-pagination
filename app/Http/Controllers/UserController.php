@@ -20,10 +20,6 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        /*
-        Ejercicio: añadir reglas de validación
-        */
-
         $name = $request->name;
         $email = $request->email;
         $uphone = $request->phone;
@@ -47,9 +43,8 @@ class UserController extends Controller
     }
 
     public function paginate(Request $request){
-        /*
-        Ejercicio: añadir código para paginación, 5 usuarios por página
-        */
+        $users = User::paginate(5);
+		return view('user.paginate', ['users' => $users]);
     }
 
 }
