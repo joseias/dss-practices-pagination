@@ -6,6 +6,7 @@
   </head>
   <body>
     <form id="form_user" action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+    @csrf
       <div class="container">
         <h1>Nuevo usuario</h1>
         <hr>

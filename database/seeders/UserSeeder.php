@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
@@ -10,10 +11,8 @@ class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
         // clean the table
         DB::table('users')->delete();
@@ -27,7 +26,7 @@ class UserSeeder extends Seeder
             $user = [
                 'name' => fake()->name(),
                 'email' => fake()->unique()->safeEmail(),
-                'password' => Str::random(10),
+                'password' => Str::random(10), // hash it!
             ];
 
             $users[] = $user;
