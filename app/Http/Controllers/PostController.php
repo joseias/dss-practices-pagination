@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+
 use Illuminate\Http\Request;
 
 use App\Models\User;
@@ -22,18 +24,38 @@ class PostController extends Controller
         ]);
 
 
-        $user = User::findOrFail(1);
+        $user_id = 1; // just an example
 
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->date = date("Y-m-d");
+        try {
+            $user = User::findOrFail($user_id);
 
-        $post->user()->associate($user);
+            $post = new Post();
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $post->date = date("Y-m-d");
 
-        $post->save();
+            $post->user()->associate($user);
 
-        return "Post created";
+            $post->save();
+
+            return view('post.show', ['post' => $post]);
+        } catch (Exception $e) {
+            return response()->json(["message" => "user id = {$user_id} not found!"], 404);
+        }
     }
 
+    public function paginate()
+    {
+        $posts = Post::paginate(5); // Fetch 5 posts per page
+        return view('post.paginate', ['posts' => $posts]);
+    }
+
+    public function show($id){
+        try {
+            $post = Post::findOrFail($id);
+            return view('post.show', ['post' => $post]);
+        } catch (Exception $e) {
+            return response()->json(["message" => "post id = {$id} not found!"], 404);
+        }
+    }
 }

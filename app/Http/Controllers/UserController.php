@@ -39,12 +39,11 @@ class UserController extends Controller
         $phone->user()->associate($user);
         $phone->save();
 
-        return view('user.profile', ['user' => $user]);
+        return view('user.show', ['user' => $user]);
     }
 
     public function paginate(Request $request){
         $users = User::paginate(5);
-		return view('user.paginate', ['users' => $users]);
+        return view('user.paginate', ['users' => $users]);
     }
-
 }
